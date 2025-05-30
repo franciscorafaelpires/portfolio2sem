@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= portfolio.name %> - Contato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <section id="contact" class="section">
+      <h1>Contato</h1>
+      <p><strong>LinkedIn:</strong> <a href="<%= portfolio.contact.linkedin %>" target="_blank">linkedin.com/in/francisco-rafael-pires-755958163/</a></p>
+      <p><strong>GitHub:</strong> <a href="<%= portfolio.contact.github %>" target="_blank">github.com/franciscorafaelpires</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:<%= portfolio.contact.email %>"><%= portfolio.contact.email %></a></p>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

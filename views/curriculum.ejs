@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= portfolio.name %> - Currículo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <section id="curriculum" class="section">
+      <h1>Currículo</h1>
+      <div id="curriculum-content"></div>
+    </section>
+  </main>
+  <%- include('partials/footer') %>
+  <script>
+    async function loadCurriculum() {
+      try {
+        const response = await fetch('/api/curriculum');
+        const curriculum = await response.json();
+        const contentDiv = document.getElementById('curriculum-content');
+        if (curriculum.length > 0) {
+          const { education, certifications } = curriculum[0];
+          let html = '';
+          if (education) html += `<h2>Formação Acadêmica</h2><p>${education}</p>`;
+          if (certifications) {
+            html += `<h2>Certificações</h2><ul>`;
+            certifications.split('\n').forEach(cert => {
+              if (cert.trim()) html += `<li>${cert.trim()}</li>`;
+            });
+            html += `</ul>`;
+          }
+          contentDiv.innerHTML = html;
+        } else {
+          contentDiv.innerHTML = '<p>Nenhum currículo cadastrado.</p>';
+        }
+      } catch (error) {
+        console.error('Erro ao carregar currículo:', error);
+      }
+    }
+    window.onload = loadCurriculum;
+  </script>
+</body>
+</html>
