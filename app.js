@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
-const { default: portfolioData } = require('./portfolioData');
 const app = express();
 const port = 3000;
 
@@ -24,25 +23,88 @@ db.connect(err => {
   console.log('Conectado ao Mysql');
 });
 
+// Função auxiliar para buscar dados do portfólio
+async function getPortfolioData() {
+  return new Promise((resolve, reject) => {
+    const portfolioData = {};
+    
+    // Buscar informações básicas
+    db.query('SELECT * FROM portfolio_info LIMIT 1', (err, results) => {
+      if (err) return reject(err);
+      portfolioData.info = results[0];
+      
+      // Buscar certificações
+      db.query('SELECT * FROM certifications', (err, certResults) => {
+        if (err) return reject(err);
+        portfolioData.certifications = certResults;
+        
+        // Buscar skills
+        db.query('SELECT * FROM skills', (err, skillsResults) => {
+          if (err) return reject(err);
+          portfolioData.skills = skillsResults;
+          
+          // Buscar trabalhos acadêmicos
+          db.query('SELECT * FROM academic_works', (err, worksResults) => {
+            if (err) return reject(err);
+            portfolioData.academicWorks = worksResults;
+            
+            resolve(portfolioData);
+          });
+        });
+      });
+    });
+  });
+}
+
 // Rotas para as paginas do portfolio
-app.get('/', (req, res) => {
-  res.render('index', { portfolio: portfolioData });
+app.get('/', async (req, res) => {
+  try {
+    const portfolioData = await getPortfolioData();
+    res.render('index', { portfolio: portfolioData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao carregar dados do portfólio');
+  }
 });
 
-app.get('/curriculum', (req, res) => {
-  res.render('curriculum', { portfolio: portfolioData });
+app.get('/curriculum', async (req, res) => {
+  try {
+    const portfolioData = await getPortfolioData();
+    res.render('curriculum', { portfolio: portfolioData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao carregar dados do currículo');
+  }
 });
 
-app.get('/projects', (req, res) => {
-  res.render('projects', { portfolio: portfolioData });
+app.get('/projects', async (req, res) => {
+  try {
+    const portfolioData = await getPortfolioData();
+    res.render('projects', { portfolio: portfolioData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao carregar dados dos projetos');
+  }
 });
 
-app.get('/skills', (req, res) => {
-  res.render('skills', { portfolio: portfolioData });
+app.get('/skills', async (req, res) => {
+  try {
+    const portfolioData = await getPortfolioData();
+    res.render('skills', { portfolio: portfolioData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao carregar dados das habilidades');
+  }
 });
 
-app.get('/contact', (req, res) => {
-  res.render('contact', { portfolio: portfolioData });
+app.get('/contact', async (req, res) => {
+  try {
+    const portfolioData = await getPortfolioData();
+    res.render('contact', { portfolio: portfolioData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao carregar dados de contato');
+  }
 });
 
 // CRUD para projetos
@@ -50,15 +112,49 @@ app.get('/contact', (req, res) => {
 app.post('/api/projects', (req, res) => {
   const { nome, descricao, tecnologias, desafio, solucao, repositorio, imagem } = req.body;
   const sql = 'INSERT INTO projects (nome, descricao, tecnologias, desafio, solucao, repositorio, imagem) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  
   db.query(sql, [nome, descricao, tecnologias, desafio, solucao, repositorio, imagem], (err, result) => {
     if (err) return res.status(500).send(err);
-    res.send({ mensagem: 'projeto inserido com sucesso', id: result.insertId, nome, descricao, tecnologias, desafio, solucao, repositorio, imagem });
+    
+    // Buscar as skills associadas ao projeto
+    const projectId = result.insertId;
+    const getSkillsSql = `
+      SELECT s.* 
+      FROM skills s 
+      INNER JOIN project_skills ps ON s.id = ps.skill_id 
+      WHERE ps.project_id = ? AND s.type = 'technical'
+    `;
+    
+    db.query(getSkillsSql, [projectId], (err, skills) => {
+      if (err) return res.status(500).send(err);
+      
+      res.send({ 
+        mensagem: 'projeto inserido com sucesso', 
+        id: projectId, 
+        nome, 
+        descricao, 
+        tecnologias, 
+        desafio, 
+        solucao, 
+        repositorio, 
+        imagem,
+        skills
+      });
+    });
   });
 });
 
 // READ all
 app.get('/api/projects', (req, res) => {
-  db.query('SELECT * FROM projects', (err, results) => {
+  const sql = `
+    SELECT p.*, GROUP_CONCAT(s.name) as skills_list
+    FROM projects p
+    LEFT JOIN project_skills ps ON p.id = ps.project_id
+    LEFT JOIN skills s ON ps.skill_id = s.id AND s.type = 'technical'
+    GROUP BY p.id
+  `;
+  
+  db.query(sql, (err, results) => {
     if (err) return res.status(500).send(err);
     res.send(results);
   });
@@ -66,7 +162,16 @@ app.get('/api/projects', (req, res) => {
 
 // READ by ID
 app.get('/api/projects/:id', (req, res) => {
-  db.query('SELECT * FROM projects WHERE id = ?', [req.params.id], (err, result) => {
+  const sql = `
+    SELECT p.*, GROUP_CONCAT(s.name) as skills_list
+    FROM projects p
+    LEFT JOIN project_skills ps ON p.id = ps.project_id
+    LEFT JOIN skills s ON ps.skill_id = s.id AND s.type = 'technical'
+    WHERE p.id = ?
+    GROUP BY p.id
+  `;
+  
+  db.query(sql, [req.params.id], (err, result) => {
     if (err) return res.status(500).send(err);
     if (result.length === 0) return res.status(404).send({ mensagem: 'Projeto não encontrado' });
     res.send(result[0]);
@@ -79,7 +184,15 @@ app.put('/api/projects/:id', (req, res) => {
   const sql = 'UPDATE projects SET nome = ?, descricao = ?, tecnologias = ?, desafio = ?, solucao = ?, repositorio = ?, imagem = ? WHERE id = ?';
   db.query(sql, [nome, descricao, tecnologias, desafio, solucao, repositorio, imagem, req.params.id], (err) => {
     if (err) return res.status(500).send(err);
-    res.send({ mensagem: 'Projeto atualizado com sucesso' });
+    res.send({ 
+      nome,
+      descricao,
+      tecnologias,
+      desafio,
+      solucao,
+      repositorio,
+      imagem
+    });
   });
 });
 

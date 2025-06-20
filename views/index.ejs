@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= portfolio.name %> - Apresentação</title>
+  <title><%= portfolio.info.name %> - Apresentação</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -12,9 +12,9 @@
   <main>
     <section id="introduction" class="section">
       <h1>Apresentação</h1>
-      <p><strong>Nome:</strong> <%= portfolio.name %></p>
-      <p><strong>Formação:</strong> <%= portfolio.course %></p>
-      <p><strong>Sobre mim e Objetivo:</strong> <%= portfolio.objective %></p>
+      <p><strong>Nome:</strong> <%= portfolio.info.name %></p>
+      <p><strong>Formação:</strong> <%= portfolio.info.course %></p>
+      <p><strong>Sobre mim e Objetivo:</strong> <%= portfolio.info.objective %></p>
     </section>
   </main>
   <%- include('partials/footer') %>
