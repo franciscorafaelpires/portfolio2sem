@@ -6,62 +6,54 @@
   <title><%= portfolio.info.name %> - Projetos</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .project {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #333;
+    }
+    .project img {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      max-width: 80%;
+      height: 50%;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .project-link {
+      color: #00fff7;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-left: 0.3rem;
+      margin-top: 0.7rem;
+      text-align: center;
+    }
+    .project-link:hover {
+      color: #b97aff;
+    }
+  </style>
 </head>
 <body>
   <%- include('partials/header') %>
   <main>
     <section id="projects" class="section">
       <h1>Projetos</h1>
-      <div id="project-list"></div>
-
-      <h1>Trabalhos Acadêmicos</h1>
-      <% portfolio.academicWorks.forEach(work => { %>
-      <div class="work">
-        <h2><%= work.title %></h2>
-        <p><strong>Resumo:</strong> <%= work.summary %></p>
-        <p><strong>Resultados:</strong> <%= work.results %></p>
-      </div>
+      <% portfolio.projects.forEach(function(project) { %>
+        <div class="project">
+          <h2><%= project.nome %></h2>
+          <p><strong>Descrição:</strong> <%= project.descricao %></p>
+          <p><strong>Tecnologias:</strong> <%= project.tecnologias %></p>
+          <p><strong>Desafio:</strong> <%= project.desafio %></p>
+          <p><strong>Solução:</strong> <%= project.solucao %></p>
+          <img src="<%= project.imagem %>" alt="Screenshot do projeto <%= project.nome %>" />
+          <div style="text-align: center; margin-top: 0.7rem;">
+            <a class="project-link" href="<%= project.repositorio %>" target="_blank">Repositório</a>
+          </div>
+        </div>
       <% }); %>
     </section>
   </main>
   <%- include('partials/footer') %>
-
-  <script>
-    // conecta com a api e exibe os projetos
-    async function loadProjects() {
-      try {
-        const response = await fetch('/api/projects');
-        const projects = await response.json();
-        const projectList = document.getElementById('project-list');
-        projectList.innerHTML = ''; // Limpa a lista antes de recarregar
-        
-        projects.forEach(project => {
-          const projectDiv = document.createElement('div');
-          projectDiv.className = 'project';
-          
-          // Cria a lista de habilidades técnicas
-          const skillsList = project.skills_list ? 
-            `<p><strong>Habilidades Técnicas:</strong> ${project.skills_list}</p>` : '';
-          
-          projectDiv.innerHTML = `
-            <h2>${project.nome}</h2>
-            <p><strong>Descrição:</strong> ${project.descricao}</p>
-            <p><strong>Tecnologias:</strong> ${project.tecnologias}</p>
-            ${skillsList}
-            <p><strong>Desafio:</strong> ${project.desafio}</p>
-            <p><strong>Solução:</strong> ${project.solucao}</p>
-            <p><a href="${project.repositorio}" target="_blank">Repositório</a></p>
-            <img src="${project.imagem}" alt="Screenshot do projeto ${project.nome}" />
-          `;
-          projectList.appendChild(projectDiv);
-        });
-      } catch (error) {
-        console.error('Erro ao carregar projetos:', error);
-      }
-    }
-
-    // carrega os projetos
-    window.onload = loadProjects;
-  </script>
 </body>
 </html>

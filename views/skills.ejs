@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= portfolio.name %> - Habilidades</title>
+  <title><%= portfolio.info.name %> - Habilidades</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -13,32 +13,19 @@
     <section id="skills" class="section">
       <h1>Habilidades</h1>
       <h2>Competências Técnicas</h2>
-      <ul id="technical-skills-list"></ul>
+      <ul>
+        <% portfolio.skills.filter(skill => skill.type === 'technical').forEach(function(skill) { %>
+          <li><%= skill.name %></li>
+        <% }); %>
+      </ul>
       <h2>Soft Skills</h2>
-      <ul id="soft-skills-list"></ul>
+      <ul>
+        <% portfolio.skills.filter(skill => skill.type === 'soft').forEach(function(skill) { %>
+          <li><%= skill.name %></li>
+        <% }); %>
+      </ul>
     </section>
   </main>
   <%- include('partials/footer') %>
-  <script>
-    async function loadSkills() {
-      try {
-        const response = await fetch('/api/skills');
-        const skills = await response.json();
-        const technicalList = document.getElementById('technical-skills-list');
-        const softList = document.getElementById('soft-skills-list');
-        technicalList.innerHTML = '';
-        softList.innerHTML = '';
-        skills.forEach(skill => {
-          const li = document.createElement('li');
-          li.textContent = skill.name;
-          if (skill.type === 'technical') technicalList.appendChild(li);
-          else if (skill.type === 'soft') softList.appendChild(li);
-        });
-      } catch (error) {
-        console.error('Erro ao carregar skills:', error);
-      }
-    }
-    window.onload = loadSkills;
-  </script>
 </body>
 </html>
