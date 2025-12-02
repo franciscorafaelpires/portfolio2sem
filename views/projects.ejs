@@ -8,29 +8,60 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .project {
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
       border-bottom: 1px solid #333;
     }
+    .project:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .project h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .project p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
     .project img {
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
       display: block;
-      max-width: 80%;
-      height: 50%;
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     }
     .project-link {
       color: #00fff7;
       font-weight: bold;
-      text-decoration: underline;
-      margin-left: 0.3rem;
+      text-decoration: none;
       margin-top: 0.7rem;
       text-align: center;
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: rgba(0, 255, 247, 0.15);
+      border: 1px solid #00fff7;
+      border-radius: 5px;
+      transition: all 0.3s;
     }
     .project-link:hover {
       color: #b97aff;
+      background: rgba(185, 122, 255, 0.15);
+      border-color: #b97aff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(185, 122, 255, 0.2);
+    }
+    @media (max-width: 600px) {
+      .project {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+      }
+      .project p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
     }
   </style>
 </head>

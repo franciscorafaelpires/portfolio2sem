@@ -3,7 +3,7 @@
     {
       "nome": "Site para ajudar os eleitores a acompanhar e escolher vereadores (API)",
       "descricao": "Desenvolvi em equipe um site que facilita o acesso para o eleitor acompanhar o trabalho dos vereadores de São José dos Campos, inspirado no site da camaraSemPapel.",
-      "tecnologias": "Flask, MySQL, HTML, CSS, JavaScript",
+      "tecnologias": "Flask, MySQL, HTML, CSS, JavaScript, GIT, Jira",
       "desafio": "Desenvolver a página sobre nós, que mostra um pouco sobre os membros do grupo de API, implementei as rotas no Flask, implementei a lógica do campo de busca na página menu.",
       "solucao": "Utilizei o micro framework Flask junto com HTML e CSS para facilitar a implementação de uma interface Web intuitiva.",
       "repositorio": "https://github.com/Byte-Team-Fatec/Byte_Team-API-1-",
@@ -12,11 +12,20 @@
     {
       "nome": "Dashboard Web com Dados de Impacto (API)",
       "descricao": "Projeto desenvolvido para a plataforma Helpnei.",
-      "tecnologias": "Node.js, Express, Mysql, HTML/CSS, JavaScript, React, Typescript",
+      "tecnologias": "Node.js, Express, Mysql, HTML/CSS, JavaScript, React, Typescript, GIT, Jira",
       "desafio": "Foco em exibição de indicadores estratégicos para patrocinadores, administradores e stakeholders.",
       "solucao": "Integração de biblioteca JavaScript com API REST para uma interface intuitiva.",
       "repositorio": "https://github.com/ORBIS-2DSM-API/orbis-main",
       "imagem": "/images/helpnei.png"
+    },
+    {
+      "nome": "Sistema de gerenciamento de tarefas (API)",
+      "descricao": "Projeto desenvolvido para a plataforma GSW para o gerenciamento de tarefas.",
+      "tecnologias": "React, Typescript, HTML, TailwindCSS, VITE, Java, Spring-boot, Maven, MongoDb, GIT, Jira",
+      "desafio": "O desafio é oferecer uma solução que simplifique o processo de gerenciamento de tarefas, permitindo que todos os integrantes da equipe tenham visibilidade sobre o andamento das tarefas, possam colaborar em tempo real e anexar documentos de suporte diretamente às atividades.",
+      "solucao": "Desenvolver uma aplicação web responsiva, utilizando React, TypeScript e Vite no frontend, garantindo alta performance, modularidade e excelente experiência de uso em dispositivos desktop e mobile. O backend foi implementado em Java com Spring Boot, estruturado em arquitetura de microserviços, permitindo escalabilidade, fácil manutenção e comunicação eficiente entre os serviços.",
+      "repositorio": "https://github.com/Syntax-Fatec-SJC/SideQuest",
+      "imagem": "/images/gerenciamento-de-tarefas-3semestre.png"
     }
   ],
   "curriculo": {
@@ -26,11 +35,11 @@
   "skills": {
     "technical": [
       {
-        "name": "Linguagens: HTML5, CSS3, JavaScript, TypeScript, C#, Python, SQL",
+        "name": "Linguagens: HTML5, CSS3, TailwindCSS, JavaScript, TypeScript, C#, Python, SQL, Java",
         "type": "technical"
       },
       {
-        "name": "Frameworks: React, Node.js, Express, .NET Core, Flask",
+        "name": "Frameworks: React, Node.js, Express, .NET Core, Flask, VITE, Spring-boot",
         "type": "technical"
       },
       {

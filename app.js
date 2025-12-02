@@ -36,8 +36,8 @@ app.get('/contact', (req, res) => {
   res.render('contact', { portfolio: portfolioData });
 });
 
-// app.listen(port, () => {
-//   console.log(`Servidor rodando em http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${port}`);
+});
 
 module.exports = app;

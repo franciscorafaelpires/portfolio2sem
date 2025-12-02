@@ -6,6 +6,41 @@
   <title><%= portfolio.info.name %> - Contato</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    #contact p {
+      word-break: break-word;
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+    #contact strong {
+      display: inline-block;
+      min-width: 90px;
+    }
+    #contact a {
+      display: inline-block;
+      padding: 0.4rem 0.7rem;
+      background: rgba(0, 255, 247, 0.1);
+      border-radius: 5px;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+    #contact a:hover {
+      background: rgba(185, 122, 255, 0.15);
+      border-color: #b97aff;
+      transform: translateX(3px);
+    }
+    @media (max-width: 600px) {
+      #contact p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      #contact strong {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <%- include('partials/header') %>
