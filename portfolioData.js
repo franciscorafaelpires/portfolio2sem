@@ -45,6 +45,7 @@ const portfolioData = {
       skills_list: 'React, Typescript, HTML, TailwindCSS, Vite, Java, Spring-boot, Maven, MongoDB',
       desafio: 'O desafio é oferecer uma solução que simplifique o processo de gerenciamento de tarefas, permitindo que todos os integrantes da equipe tenham visibilidade sobre o andamento das tarefas, possam colaborar em tempo real e anexar documentos de suporte diretamente às atividades.',
       solucao: 'Desenvolver uma aplicação web responsiva, utilizando React, TypeScript e Vite no frontend, garantindo alta performance, modularidade e excelente experiência de uso em dispositivos desktop e mobile. O backend foi implementado em Java com Spring Boot, estruturado em arquitetura de microserviços, permitindo escalabilidade, fácil manutenção e comunicação eficiente entre os serviços.',
+      contribuicoes: 'Durante o projeto, atuei no papel de Desenvolvedor no time Scrum, sendo responsável principalmente pela evolução da arquitetura backend. Realizei a refatoração completa do backend monolítico para uma arquitetura de microserviços, garantindo melhor desacoplamento, escalabilidade e manutenção do sistema. Desenvolvi e implementei serviços independentes utilizando Spring Boot, organizei a comunicação entre eles via APIs REST, e integrei autenticação distribuída por meio de JWT, permitindo um fluxo seguro e stateless entre os serviços.',
       repositorio: 'https://github.com/Syntax-Fatec-SJC/SideQuest',
       imagem: '/images/gerenciamento-de-tarefas-3semestre.png'
     }

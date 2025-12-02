@@ -77,6 +77,9 @@
           <p><strong>Tecnologias:</strong> <%= project.tecnologias %></p>
           <p><strong>Desafio:</strong> <%= project.desafio %></p>
           <p><strong>Solução:</strong> <%= project.solucao %></p>
+          <% if (project.contribuicoes) { %>
+            <p><strong>Contribuições:</strong> <%= project.contribuicoes %></p>
+          <% } %>
           <img src="<%= project.imagem %>" alt="Screenshot do projeto <%= project.nome %>" />
           <div style="text-align: center; margin-top: 0.7rem;">
             <a class="project-link" href="<%= project.repositorio %>" target="_blank">Repositório</a>
