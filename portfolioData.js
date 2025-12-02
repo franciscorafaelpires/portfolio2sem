@@ -18,7 +18,7 @@ const portfolioData = {
   },
   projects: [
     {
-      nome: 'Site para ajudar os eleitores a acompanhar e escolher vereadores (API)',
+      nome: 'Site para ajudar os eleitores a acompanhar e escolher vereadores (API - 1ºSemestre.)',
       descricao: 'Desenvolvi em equipe um site que facilita o acesso para o eleitor acompanhar o trabalho dos vereadores de São José dos Campos, inspirado no site da camaraSemPapel.',
       tecnologias: 'Flask, MySQL, HTML, CSS, JavaScript',
       skills_list: 'Flask, MySQL, HTML, CSS, JavaScript',
@@ -28,7 +28,7 @@ const portfolioData = {
       imagem: '/images/projeto-1sem.png'
     },
     {
-      nome: 'Dashboard Web com Dados de Impacto (API)',
+      nome: 'Dashboard Web com Dados de Impacto (API - 2ºSemestre.)',
       descricao: 'Projeto desenvolvido para a plataforma Helpnei.',
       tecnologias: 'Node.js, Express, Mysql, HTML/CSS, JavaScript, React, Typescript',
       skills_list: 'Node.js, Express, Mysql, HTML/CSS, JavaScript, React, Typescript',
@@ -39,7 +39,7 @@ const portfolioData = {
     }
     ,
     {
-      nome: 'Sistema de gerenciamento de tarefas (API)',
+      nome: 'Sistema de gerenciamento de tarefas (API - 3ºSemestre.)',
       descricao: 'Projeto desenvolvido para a plataforma GSW para o gerenciamento de tarefas.',
       tecnologias: 'React, Typescript, HTML, TailwindCSS, VITE, Java, Spring-boot, Maven, MongoDb, GIT, Jira',
       skills_list: 'React, Typescript, HTML, TailwindCSS, Vite, Java, Spring-boot, Maven, MongoDB',
