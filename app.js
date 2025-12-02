@@ -36,8 +36,11 @@ app.get('/contact', (req, res) => {
   res.render('contact', { portfolio: portfolioData });
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
-});
+// Não chama listen() quando executado no Vercel (serverless)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Servidor rodando em http://localhost:${port}`);
+  });
+}
 
 module.exports = app;
